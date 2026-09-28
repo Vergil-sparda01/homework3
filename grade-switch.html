@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Checker with Switch Statement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: white;
+        }
+
+        .control-panel {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            width: 150px;
+            padding: 8px 12px;
+            font-size: 16px;
+            border: 1px solid gray;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .btn-orange {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            font-size: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-blue {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            font-size: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #outputBox {
+            background-color: black;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            width: 300px;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>การตรวจสอบเกรด (Switch Statement)</h2>
+
+    <div class="control-panel">
+        <input type="number" id="scoreInput" placeholder="กรอกคะแนน" min="0" max="100">
+        <button class="btn-orange" onclick="processGrade()">แสดงผล</button>
+        <button class="btn-blue" onclick="randomAndProcess()">สุ่มคะแนน (Run Code)</button>
+    </div>
+
+    <div id="outputBox"></div>
+
+    <script>
+        function calculateGrade(score) {
+            let grade = "";
+            let resultStatus = "";
+            let description = "";
+
+            if (score >= 80) {
+                grade = "A";
+                resultStatus = "ผ่าน";
+            } else if (score >= 70) {
+                grade = "B";
+                resultStatus = "ผ่าน";
+            } else if (score >= 60) {
+                grade = "C";
+                resultStatus = "ผ่าน";
+            } else if (score >= 50) {
+                grade = "D";
+                resultStatus = "ผ่าน";
+            } else {
+                grade = "F";
+                resultStatus = "ไม่ผ่าน";
+            }
+
+            switch (grade) {
+                case "A":
+                    description = "ยอดเยี่ยมมาก";
+                    break;
+                case "B":
+                    description = "ดีมาก รักษามาตรฐานไว้";
+                    break;
+                case "C":
+                    description = "ผ่านเกณฑ์ระดับดี";
+                    break;
+                case "D":
+                    description = "พอใช้ แต่ควรพัฒนาเพิ่ม";
+                    break;
+                case "F":
+                    description = "ต้องลงทะเบียนเรียนใหม่";
+                    break;
+                default:
+                    description = "ไม่สามารถระบุได้";
+            }
+
+            // 3. แสดงผลใน Console
+            console.log(`คะแนนที่สุ่มได้/กรอกได้: ${score}`);
+            console.log(`เกรด: ${grade}`);
+            console.log(`ผลสอบ: ${resultStatus}`);
+            console.log(`คำอธิบาย: ${description}`);
+
+            document.getElementById("outputBox").innerHTML = `
+                คะแนนที่สุ่มได้: ${score}<br>
+                เกรด: ${grade}<br>
+                ผลสอบ: ${resultStatus}<br>
+                คำอธิบาย: ${description}
+            `;
+        }
+
+        function processGrade() {
+            let inputVal = document.getElementById("scoreInput").value;
+            if (inputVal === "" || inputVal < 0 || inputVal > 100) {
+                alert("กรุณากรอกคะแนนระหว่าง 0 - 100");
+                return;
+            }
+            calculateGrade(Number(inputVal));
+        }
+
+        function randomAndProcess() {
+            let randomScore = Math.floor(Math.random() * 101);
+            document.getElementById("scoreInput").value = randomScore;
+            calculateGrade(randomScore);
+        }
+    </script>
+
+</body>
+</html>
